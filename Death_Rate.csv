@@ -1,0 +1,226 @@
+1,Lesotho,15
+2,Lithuania,14.6
+3,Bulgaria,14.5
+4,Latvia,14.5
+5,Ukraine,14.4
+6,Guinea-Bissau,13.9
+7,Chad,13.8
+8,Serbia,13.6
+9,Russia,13.5
+10,Afghanistan,13.4
+11,Central African Republic,13.2
+12,Belarus,13.2
+13,Swaziland,13.2
+14,Somalia,13.1
+15,Gabon,13
+16,Hungary,12.8
+17,Estonia,12.6
+18,Moldova,12.6
+19,Nigeria,12.4
+20,Zambia,12.2
+21,Croatia,12.2
+22,Romania,12
+23,Niger,11.8
+24,Germany,11.7
+25,Mozambique,11.6
+26,Slovenia,11.6
+27,Greece,11.3
+28,Burkina Faso,11.2
+29,Portugal,11.1
+30,Georgia,10.9
+31,Czechia,10.5
+32,Italy,10.4
+33,Poland,10.4
+34,Sierra Leone,10.4
+35,Denmark,10.3
+36,Zimbabwe,10.2
+37,Isle of Man,10.2
+38,Uganda,10.2
+39,Bosnia and Herzegovina,10
+40,Finland,10
+41,Slovakia,9.9
+42,Saint Pierre and Miquelon,9.9
+43,Mali,9.8
+44,Monaco,9.8
+45,Japan,9.8
+46,Belgium,9.7
+47,Montenegro,9.7
+48,Cameroon,9.6
+49,Botswana,9.6
+50,Austria,9.6
+51,"Congo, Democratic Republic of the",9.6
+52,"Congo, Republic of the",9.5
+53,Cote d'Ivoire,9.4
+54,Armenia,9.4
+55,United Kingdom,9.4
+56,Uruguay,9.4
+57,Sweden,9.4
+58,South Africa,9.4
+59,Malta,9.4
+60,France,9.3
+61,"Korea, North",9.3
+62,Angola,9.2
+63,Macedonia,9.2
+64,Spain,9.1
+65,Guernsey,9
+66,Guinea,9
+67,Netherlands,8.9
+68,Faroe Islands,8.8
+69,Burundi,8.8
+70,Trinidad and Tobago,8.8
+71,Greenland,8.7
+72,San Marino,8.7
+73,Canada,8.7
+74,Cuba,8.7
+75,Bermuda,8.6
+76,Puerto Rico,8.6
+77,Barbados,8.6
+78,Gibraltar,8.5
+79,Tuvalu,8.5
+80,Cook Islands,8.4
+81,Curacao,8.4
+82,Aruba,8.4
+83,Switzerland,8.3
+84,Grenada,8.2
+85,United States,8.2
+86,Palau,8.1
+87,Norway,8.1
+88,Kazakhstan,8.1
+89,Western Sahara,8.1
+90,Senegal,8.1
+91,Thailand,8
+92,Benin,7.9
+93,Dominica,7.9
+94,Malawi,7.9
+95,Mauritania,7.9
+96,Namibia,7.9
+97,Equatorial Guinea,7.8
+98,Jersey,7.8
+99,Virgin Islands,7.8
+100,"Saint Helena, Ascension, and Tristan da Cunha",7.8
+101,China,7.8
+102,Ethiopia,7.7
+103,Saint Lucia,7.7
+104,South Sudan,7.7
+105,Liberia,7.6
+106,Haiti,7.6
+107,Tanzania,7.6
+108,Djibouti,7.5
+109,Cambodia,7.5
+110,Argentina,7.5
+111,New Zealand,7.5
+112,Guyana,7.4
+113,Taiwan,7.4
+114,Burma,7.4
+115,Laos,7.4
+116,Liechtenstein,7.4
+117,Hong Kong,7.4
+118,India,7.3
+119,Australia,7.3
+120,Andorra,7.3
+121,Saint Vincent and the Grenadines,7.3
+122,Sudan,7.3
+123,Luxembourg,7.3
+124,Comoros,7.2
+125,"Bahamas, The",7.2
+126,Eritrea,7.2
+127,Mauritius,7.1
+128,Azerbaijan,7.1
+129,Saint Kitts and Nevis,7.1
+130,Kiribati,7
+131,Ghana,7
+132,Seychelles,7
+133,"Gambia, The",7
+134,Togo,6.9
+135,Jamaica,6.8
+136,Albania,6.8
+137,Cyprus,6.8
+138,Sao Tome and Principe,6.8
+139,Brazil,6.7
+140,Kenya,6.7
+141,Papua New Guinea,6.6
+142,Ireland,6.6
+143,Kyrgyzstan,6.5
+144,Bhutan,6.5
+145,Indonesia,6.5
+146,Madagascar,6.5
+147,Bolivia,6.4
+148,Iceland,6.4
+149,Rwanda,6.4
+150,Pakistan,6.3
+151,Tunisia,6.3
+152,Mongolia,6.3
+153,Sri Lanka,6.2
+154,Montserrat,6.2
+155,Chile,6.2
+156,Philippines,6.1
+157,Peru,6.1
+158,Suriname,6.1
+159,Fiji,6.1
+160,Turkmenistan,6.1
+161,Tajikistan,6
+162,Guam,6
+163,Cabo Verde,6
+164,Belize,6
+165,Turkey,6
+166,Yemen,6
+167,"Korea, South",6
+168,American Samoa,5.9
+169,Nauru,5.9
+170,Vietnam,5.9
+171,Timor-Leste,5.9
+172,Cayman Islands,5.8
+173,El Salvador,5.8
+174,New Caledonia,5.7
+175,Antigua and Barbuda,5.7
+176,Nepal,5.6
+177,Colombia,5.5
+178,Bangladesh,5.4
+179,Wallis and Futuna,5.4
+180,Samoa,5.3
+181,Uzbekistan,5.3
+182,Mexico,5.3
+183,Iran,5.3
+184,Honduras,5.3
+185,Venezuela,5.3
+186,French Polynesia,5.2
+187,Israel,5.2
+188,Sint Maarten,5.2
+189,Nicaragua,5.1
+190,British Virgin Islands,5.1
+191,Ecuador,5.1
+192,Malaysia,5.1
+193,Lebanon,5
+194,Falkland Islands (Islas Malvinas),4.9
+195,Morocco,4.9
+196,Tonga,4.9
+197,Panama,4.9
+198,Paraguay,4.8
+199,Northern Mariana Islands,4.8
+200,Guatemala,4.7
+201,Costa Rica,4.7
+202,Dominican Republic,4.7
+203,Egypt,4.6
+204,Anguilla,4.6
+205,Macau,4.5
+206,Algeria,4.3
+207,"Micronesia, Federated States of",4.2
+208,Marshall Islands,4.2
+209,Maldives,4
+210,Vanuatu,4
+211,Syria,4
+212,Iraq,3.8
+213,Solomon Islands,3.8
+214,Brunei,3.6
+215,Libya,3.6
+216,West Bank,3.5
+217,Singapore,3.5
+218,Jordan,3.4
+219,Saudi Arabia,3.4
+220,Oman,3.3
+221,Turks and Caicos Islands,3.2
+222,Gaza Strip,3.1
+223,Bahrain,2.8
+224,Kuwait,2.2
+225,United Arab Emirates,1.9
+226,Qatar,1.5
