@@ -1,0 +1,417 @@
+---
+title: "Explorotory analysis of happiness"
+author: "Qing Tian"
+date: "Feb 26, 2018"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load libraries:
+```{r}
+library(tidyverse)
+```
+
+
+###import data first:
+
+```{r}
+data2015 <- read_csv("2015.csv")
+data2017 <- read_csv("2017.csv")
+```
+
+```{r}
+data2015
+data2017
+```
+
+
+
+### Data wrangling (get data ready for analysis):
+
+####pick useful variables
+```{r}
+names(data2015)
+subdata2015 <- select(data2015,Country, Region, "Happiness Rank","Happiness Score" )
+subdata2015
+```
+
+```{r}
+names(data2017)
+subdata2017 <- select(data2017,Country,"Happiness.Rank","Happiness.Score" )
+subdata2017
+```
+
+```{r}
+(join1517 <- full_join(subdata2015,subdata2017, by = 'Country'))
+
+```
+
+
+####rename variables to be more meanful
+```{r}
+
+mapnames <- c("Happiness Rank" = "Rank2015", "Happiness Score" = "Score2015","Happiness.Rank" = "Rank2017", "Happiness.Score" = "Score2017")
+
+(renamed <- plyr::rename(join1517, mapnames))
+
+```
+
+####examine NAs
+```{r}
+filter(renamed, is.na(Region))
+```
+
+```{r}
+filter(renamed, is.na(Score2015))
+```
+```{r}
+filter(renamed, is.na(Score2017))
+```
+
+####Fix some NAs
+```{r}
+renamed$Score2017[renamed$Country=="Taiwan"] <- renamed$Score2017[renamed$Country=="Taiwan Province of China"]
+renamed$Rank2017[renamed$Country=="Taiwan"] <- renamed$Rank2017[renamed$Country=="Taiwan Province of China"]
+
+renamed$Score2017[renamed$Country=="Hong Kong"] <- renamed$Score2017[renamed$Country=="Hong Kong S.A.R., China"]
+renamed$Rank2017[renamed$Country=="Hong Kong"] <- renamed$Rank2017[renamed$Country=="Hong Kong S.A.R., China"]
+
+renamed$Region[renamed$Country=="Belize"] <- "Latin America and Caribbean"
+renamed$Region[renamed$Country=="Somalia"] <- "Sub-Saharan Africa"
+renamed$Region[renamed$Country=="Namibia"] <- "Sub-Saharan Africa"
+renamed$Region[renamed$Country=="South Sudan"] <- "Sub-Saharan Africa"
+  
+(happydata <- filter(renamed,
+                renamed$Country !="Taiwan Province of China" & renamed$Country !="Hong Kong S.A.R., China"))
+
+```
+
+####re-examine NAs
+```{r}
+filter(happydata, is.na(Region))
+summary(as.factor(happydata$Region))
+filter(happydata, is.na(Score2015))
+filter(happydata, is.na(Score2017))
+```
+
+  
+    
+###Question 1:	How does happiness vary across different countries and regions? 
+  
+ hint: Use 2017 data to examine the current situation.
+ 
+
+####a. distribution, mean, median, range of the happiness score
+```{r}
+
+happydata %>%
+  summary()
+
+happydata %>%
+  geom_histogram(mapping = aes(x = Score2015))
+
+ggplot(data = happydata) +
+  geom_histogram(mapping = aes(x = Score2017))
+#The 2017 data is multimodel
+
+ggplot(data = happydata) +
+  geom_histogram(mapping = aes(x = Score2015))
+#The 2015 data is multimodel
+
+
+```
+
+
+####b. top 10 and bottom 10 countries
+
+```{r}
+#First order the data
+ordered <- arrange(happydata, Rank2017)
+
+
+#Displays the top 10
+ordered_From_Top <- top_n(ordered, 10, Rank2017)
+ordered_From_Top
+
+
+#Displaus The bottom 10
+ordered_From_Bottom <- top_n(ordered, 10, desc(Rank2017))
+ordered_From_Bottom
+```
+
+####c. Regional differences
+```{r}
+
+#First have to get rid of NA values
+happydata_no_NAs <- filter(happydata, !is.na(Score2017))
+
+
+#Now the data will show the mean score
+happydata_no_NAs %>%
+  group_by(Region) %>%
+  summarise("Mean Score2017" = mean(Score2017))
+
+
+
+```
+
+
+  
+###Question 2:	How happiness has changed over time? 
+
+ hint: Use 2015 and 2017 data to examine chnages in the happyness score.
+
+
+
+####a. Distribution of change in the happiness score, and its mean, median, and range
+
+first need to create a bew variable:
+```{r}
+
+chdata1517<- mutate (happydata,
+               Chscore1517 = Score2017 - Score2015)
+
+
+#Boxplot is just to check my answers
+ggplot(data = chdata1517) +
+  geom_boxplot(mapping = aes(x = Chscore1517, y = Chscore1517))
+
+
+chdata1517_no_NAs<- chdata1517 %>%
+  filter(!is.na(Chscore1517))
+
+
+chdata1517_no_NAs %>%
+  summarise(mean(Chscore1517), median(Chscore1517), max(Chscore1517) - min(Chscore1517))
+
+```
+
+
+####b. How many countries improved? How many countries declined? 
+
+```{r}
+
+count(filter(chdata1517, Chscore1517 > 0))
+#There are 75 countries that improved in their overall happiness
+
+count(filter(chdata1517, Chscore1517 < 0))
+#There are 76 countries that declined in their overall happiness
+
+```
+
+####c. Which countries became significantly worse? Why? Hint: may need to do a bit reading and cite the sources.
+
+```{r}
+
+verysad <- filter(chdata1517, Chscore1517 < 0)
+arrange(verysad, desc(Chscore1517))
+
+#Australia has gotten less happy over the past year because they had a cyclone hit their shores which ended up destroying their tropics
+  #Source: Blau, Annika. “From missiles to same-Sex marriage: These were the biggest stories of 2017.” ABC News, 30 Dec. 2017, www.abc.net.au/news/2017-12-31/2017-in-review-biggest-most-popular-news-stories/9291872.
+
+#Sub-Saharan Africa became less happy because they are currently in a recession with the lowest growth that they have seen in years. 
+  #Source: “Regional Economic Outlook: Sub-Saharan Africa.” IMF, www.imf.org/en/Publications/REO/SSA/Issues/2017/05/03/sreo0517.
+
+```
+
+
+
+
+###Question 3.	Which variables are correlated with (may explain) country-level happiness? 
+
+
+
+####a. examine covariation with GDP per capita
+
+import gdp data first:
+```{r}
+
+gdp <- read_csv("gdp_per_thousand.csv")
+
+(joingdp <- full_join(chdata1517, gdp, by = 'Country'))
+
+
+
+```
+
+
+examine NAs:
+```{r}
+
+filter(joingdp, is.na(Score2015))
+
+```
+
+```{r}
+
+filter(joingdp, is.na(gdp))
+
+```
+
+prepare data for examining relationship between happiness score and gdp:
+```{r}
+
+gdpdata <- 
+  joingdp %>%
+    select(Country,Score2015, Rank2015,gdp) %>%
+    filter(!is.na(Score2015) & !is.na(gdp))
+  
+```
+
+```{r}
+gdpdata
+```
+
+
+examine relationship between happiness score and gdp:
+
+```{r}
+
+ggplot(data = gdpdata) +
+  geom_point(mapping = aes(x = gdp, y = Score2015)) +
+  xlim(0, 100) 
+  ylim(0, 8) 
+  facet_wrap(~ Region)
+  #There is some positive correlation between GDP and Score2017, however it is weak.
+```
+
+
+####b. covariation with cost of living
+
+
+import COL data first:
+```{r}
+
+cost <- read_csv("Consumer prices.csv")
+cost
+(joingdp <- full_join(chdata1517, cost, by = 'Country'))
+
+
+
+```
+
+
+examine NAs:
+```{r}
+
+filter(joingdp, is.na(Score2015))
+
+```
+
+```{r}
+
+filter(joingdp, is.na(Amount))
+
+```
+
+prepare data for examining relationship between happiness score and gdp:
+```{r}
+
+costdata <- 
+  joingdp %>%
+    select(Country, Region, Score2015, Rank2015,Amount) %>%
+    filter(!is.na(Score2015) & !is.na(Amount))
+  
+```
+
+```{r}
+costdata
+```
+
+```{r}
+#Now that the file has been added, we can now to an analysis
+
+ggplot(data = costdata) +
+  geom_point(mapping = aes(x = Score2015, y = Amount, color = Region)) +
+  facet_wrap(~ Region)
+
+#Through the facet wrap, we can see that when the amount is low, countries are typically happier. There is negative correlation for many of these regions, such as Western Europe, North America, and Middle East and Northern Africa. However, for some of these regions, there seems to be no correlation, such as Central America, Central and Eastern Europe, and Sub-Saharan Africa.
+```
+
+####c. covariation with crime levels
+
+
+import gdp data first:
+```{r}
+
+crime <- read_csv("Crime_levels.csv")
+crime
+(joingdp <- full_join(chdata1517, crime, by = 'Country'))
+
+
+
+```
+
+
+examine NAs:
+```{r}
+
+filter(joingdp, is.na(Score2015))
+
+```
+
+```{r}
+
+filter(joingdp, is.na(Crimelevel))
+
+```
+
+prepare data for examining relationship between happiness score and gdp:
+```{r}
+
+crimedata <- 
+  joingdp %>%
+    select(Country, Region, Score2015, Rank2015,Crimelevel) %>%
+    filter(!is.na(Score2015) & !is.na(Crimelevel))
+  
+```
+
+```{r}
+crimedata
+```
+
+```{r}
+
+ggplot(data = crimedata) +
+  geom_point(mapping = aes(x = Crimelevel, y = Score2015, color = Region)) +
+  facet_wrap(~ Region)
+
+#In this data, it can be observed that all the data points are typically clustered together. In conclusion, based on the region, the happiness level and the crime level relate to each other by being able to predict how happy a certain country is based on a single point, as many of the other points will be clustered near by.
+
+```
+
+
+####d. question for extra points.	covariation with other variables: addional variables may be found and downloaded at:   http://www.nationmaster.com/country-info/stats 
+
+
+####Following the above exploratory analysis, reflect on the effects of the variables: 
+
+a.	How well do the variables explain happiness? 
+The variables explain happiness in a very generalistic way. Becuse there are so many variables that can affect happiness, it is hard to distinguish which variable is causing the most variation in the data.
+
+b.	Why do they explain well or poorly? 	
+They explain rather poorly, as you cannot get a strong correlation from one variable, as that variable is also dependent on other variables that may affect happiness
+
+c.	What other variables might better explain happiness? Why?  
+The other variables that would better explain happiness could be mortality rate, birth rate (Because developed countries tend to have less children), amount of diseases currently present, the amount of food per person, and ect.
+
+  
+  
+###A summary of what you have learned from this exploratory analysis: 
+  
+(i)	List major insights from this analysis
+I have learned that the region that someone is from has a very large impact on their happiness. I would suggest that that is because people gain happiness from each other, but if a society is in a low mood, then they will all be around the same level, even with bordering countries. Most regions either have a lot of developed countries, (i.e. North America and Europe) or less developed countries (i.e. South Africa, Middle East). 
+
+(ii) Briefly discuss limitations of the analysis
+Because there are so many variables that could affect happiness, it is hard to draw andy causation in them. However, all the variables have some effect on the happiness, but it is hard to see at a microscopic level.
+
+(iii)	Briefly discuss what additional data and analysis may be needed
+We would need the data that I discussed in part c. After getting that data, we could plot the birth rate vs. happiness score, or any other variables. We can also see how the variables affect each other. For example, the amount of food a country has and the ability to grow it (fertile land) would probably be directly correlated.
+
+
+

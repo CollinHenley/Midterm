@@ -1,0 +1,10 @@
+"0","#First the data sets must be imported"
+"0","pop_data <- read_csv('Birth_Rate.csv')"
+"2","Parsed with column specification:
+cols(
+  CID = col_integer(),
+  country = col_character(),
+  `birth rate` = col_double()
+)
+"
+"0","pop_data"

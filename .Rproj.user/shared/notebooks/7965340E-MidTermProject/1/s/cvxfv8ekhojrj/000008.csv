@@ -1,0 +1,10 @@
+"0","#Need to import people living with aids"
+"0","aids <- read_csv('People_Living_With_Aids.csv')"
+"2","Parsed with column specification:
+cols(
+  CID = col_integer(),
+  country = col_character(),
+  people_with_aids = col_number()
+)
+"
+"0","aids"

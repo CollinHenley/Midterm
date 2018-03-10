@@ -1,0 +1,10 @@
+"0","#Need to import the infant mortality rate"
+"0","infant_mortality <- read_csv('Infant_Mortality_Rate.csv')"
+"2","Parsed with column specification:
+cols(
+  CID = col_integer(),
+  country = col_character(),
+  infant_mortality_rate = col_double()
+)
+"
+"0","infant_mortality"

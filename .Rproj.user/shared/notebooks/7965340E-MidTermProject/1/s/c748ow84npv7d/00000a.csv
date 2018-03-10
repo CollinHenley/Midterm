@@ -1,0 +1,3 @@
+"0","#Need tog et rid of the CID"
+"0","infant_mortality <- transmute(infant_mortality, country, infant_mortality_rate)"
+"0","infant_mortality"

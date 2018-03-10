@@ -10,15 +10,134 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+```{r}
+library(tidyverse)
+```
+
+
 
 
 
 
 ```{r}
 #First the data sets must be imported
+pop_data <- read_csv('Birth_Rate.csv')
+
+pop_data
+
+```
+
+
+```{r}
+#Now the death data can be accessed.
+death_data <- read_csv('Death_Rate.csv')
+
+
+#Need to get rid of CID because it does not match up with the other CIDs, however the country name does.
+death_data <- transmute(death_data, country, death_rate)
+death_data
+```
+
+
+```{r}
+#Need to import GPD data
+GDP_data <- read_csv('GDP_DATA.csv')
+
+
+#Need to get rid of CID
+GDP_data <- select(GDP_data, country, GDP)
+GDP_data
+
+```
+
+
+```{r}
+#Need to import the infant mortality rate
+infant_mortality <- read_csv('Infant_Mortality_Rate.csv')
+infant_mortality
+
+
+#Need tog et rid of the CID
+infant_mortality <- transmute(infant_mortality, country, infant_mortality_rate)
+infant_mortality
+```
+
+
+```{r}
+#Need to import Internet Users
+
+internet <- read_csv('Internet_Users.csv')
+internet
+
+#Need to remove CID
+internet <- transmute(internet, country, internet_users)
+internet
+
+```
+
+
+```{r}
+#Need to import people living with aids
+aids <- read_csv('People_Living_With_Aids.csv')
+aids
+
+
+#Need to get rid of CID
+aids <- transmute(aids, country, people_with_aids)
+
 
 
 ```
+
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+
+
+
+
 
 
 

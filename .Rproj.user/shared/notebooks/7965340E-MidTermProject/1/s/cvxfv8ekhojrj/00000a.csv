@@ -1,0 +1,2 @@
+"0","#Need to get rid of CID"
+"0","aids <- transmute(aids, country, people_with_aids)"

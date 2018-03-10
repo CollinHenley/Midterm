@@ -1,0 +1,10 @@
+"0","#Need to import Internet Users"
+"0","internet <- read_csv('Internet_Users.csv')"
+"2","Parsed with column specification:
+cols(
+  CID = col_integer(),
+  country = col_character(),
+  internet_users = col_number()
+)
+"
+"0","internet"

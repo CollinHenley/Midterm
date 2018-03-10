@@ -1,0 +1,10 @@
+"0","#Need to import GPD data"
+"0","GDP_data <- read_csv('GDP_DATA.csv')"
+"2","Parsed with column specification:
+cols(
+  CID = col_integer(),
+  country = col_character(),
+  GDP = col_character()
+)
+"
+"0","GDP_data"
